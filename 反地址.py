@@ -1,8 +1,11 @@
+import time
 import requests
 import json
 from id_validator import validator
+import re
+import constant
 
-#陆光良制作
+
 url = "https://account-api.54traveler.com/user/account/update"
 
 headers = {
@@ -35,21 +38,16 @@ data = {
 def error():
     print('你输入的姓名/身份证可能有误')
 
+
 # 将字典转换为JSON格式的字符串
 json_data = json.dumps(data)
 response = requests.put(url, headers=headers, data=json_data)
 
 while True:
-    realname = input("请输入用户真实姓名：")
-    identityNumber = input("请输入用户身份证号码：")
-    if len(identityNumber) == 18 and len(realname) < 5 and len(realname) > 1:
-        try:
-            a = validator.is_valid(identityNumber)
-            if a is True:
-                print('验证通过')
-            else:
-                print("验证不通过")
-        except:
-            error()
-    else:
-        error()
+    name = input("请输入姓名")
+    id_card = input('请输入身份证')
+    if len(id_card) == 18 and len(name) < 5 and len(name) > 1:
+        address = "陈桥村溪口巷2号"
+        area_code = id_card[:6]
+        regional_information = constant.area[area_code]
+        print(regional_information + address)
