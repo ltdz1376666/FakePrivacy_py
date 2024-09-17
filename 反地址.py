@@ -49,5 +49,10 @@ while True:
     if len(id_card) == 18 and len(name) < 5 and len(name) > 1:
         address = "陈桥村溪口巷2号"
         area_code = id_card[:6]
-        regional_information = constant.area[area_code]
-        print(regional_information + address)
+        try:
+            regional_information = constant.area[area_code]
+            print(regional_information + address)
+        except:
+            error()
+    else:
+        error()
